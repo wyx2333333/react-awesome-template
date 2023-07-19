@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <RouterProvider router={router} />
       </Suspense>
     </SWRConfig>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

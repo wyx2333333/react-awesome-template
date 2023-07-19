@@ -1,4 +1,11 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  CreateAxiosDefaults,
+  InternalAxiosRequestConfig,
+} from 'axios'
 
 // project api response type
 type Response<T> = {
@@ -14,9 +21,11 @@ class Axios {
   constructor(config?: CreateAxiosDefaults) {
     this.instance = axios.create(config)
 
-    this.instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-      return config
-    })
+    this.instance.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        return config
+      }
+    )
 
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
@@ -53,17 +62,23 @@ class Axios {
   }
 
   upload<T, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>) {
-    return this.instance.post<T, Response<T>, D>(url, data, { ...config, ...{ headers: { 'Content-Type': 'multipart/form-data' } } })
+    return this.instance.post<T, Response<T>, D>(url, data, {
+      ...config,
+      ...{ headers: { 'Content-Type': 'multipart/form-data' } },
+    })
   }
 
   file<T, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>) {
-    return this.instance.post<T, Response<T>, D>(url, data, { ...config, ...{ responseType: 'blob' } })
+    return this.instance.post<T, Response<T>, D>(url, data, {
+      ...config,
+      ...{ responseType: 'blob' },
+    })
   }
 }
 
 const Http = new Axios({
   baseURL: import.meta.env.VITE_APP_BASE_API,
-  timeout: 5 * 60 * 1000
+  timeout: 5 * 60 * 1000,
 })
 
 export default Http
