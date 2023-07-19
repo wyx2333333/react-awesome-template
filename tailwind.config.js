@@ -2,7 +2,7 @@
 import plugin from 'tailwindcss/plugin'
 
 export default {
-  darkMode: ['class', '[class="dark"]', ':global(.dark)'],
+  darkMode: ['class', '[class="dark"]'],
   content: ['./src/**/*.{ts,tsx}'],
   plugins: [
     plugin(function ({ addComponents }) {
