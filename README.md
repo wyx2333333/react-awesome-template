@@ -27,7 +27,7 @@
 npm i react-awesome-cli -g
 
 rac
-or
+# or
 react-awesome-cli
 ```
 
@@ -44,9 +44,9 @@ cd react-awesome-template
 
 ```
 npm i
-or
+# or
 yarn
-or
+# or
 pnpm i
 ```
 
@@ -54,9 +54,9 @@ pnpm i
 
 ```
 npm dev/prod
-or
+# or
 yarn dev/prod
-or
+# or
 pnpm dev/prod
 ```
 
