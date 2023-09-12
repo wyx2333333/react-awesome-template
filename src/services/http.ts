@@ -36,7 +36,7 @@ class Axios {
         return Promise.reject(response)
       },
       (error: AxiosError) => {
-        return error
+        return Promise.reject(error)
       }
     )
   }
