@@ -16,11 +16,13 @@ export default defineConfig(({ mode }) => {
   if (!!proxyApi && !!proxyUrl) {
     proxyApi?.split(';')?.forEach((api: string, index: number) => {
       proxy[api] = {
-        target: proxyUrl?.includes(';') ? proxyUrl?.split(';')?.[index] : proxyUrl,
+        target: proxyUrl?.includes(';')
+          ? proxyUrl?.split(';')?.[index]
+          : proxyUrl,
         ws: true,
         changeOrigin: true,
         secure: false,
-        rewrite: (path: string) => path.replace(RegExp(`/^/${api}/`), '')
+        rewrite: (path: string) => path.replace(RegExp(`/^/${api}/`), ''),
       }
     })
   }
@@ -34,7 +36,9 @@ export default defineConfig(({ mode }) => {
             const info = assetInfo.name.split('.')
             let extType = info[info.length - 1]
 
-            if (/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(assetInfo.name)) {
+            if (
+              /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(assetInfo.name)
+            ) {
               extType = 'media'
             }
             if (/\.(png|jpe?g|gif|svg|webp)(\?.*)?$/.test(assetInfo.name)) {
@@ -47,39 +51,39 @@ export default defineConfig(({ mode }) => {
             return `${extType}/[name]-[hash][extname]`
           },
           chunkFileNames: 'js/[name]-[hash].js',
-          entryFileNames: 'js/[name]-[hash].js'
-        }
-      }
+          entryFileNames: 'js/[name]-[hash].js',
+        },
+      },
     },
     resolve: {
       alias: {
-        '@': resolve(resolve(), './src')
-      }
+        '@': resolve(resolve(), './src'),
+      },
     },
     server: {
       port: 3000,
       open: true,
       host: '0.0.0.0',
-      proxy
+      proxy,
     },
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/scss/base.scss";'
-        }
+          additionalData: '@import "@/scss/base.scss";',
+        },
       },
       modules: {
-        localsConvention: 'camelCaseOnly'
-      }
+        localsConvention: 'camelCaseOnly',
+      },
     },
     plugins: [
       svgr(),
       compression(),
       react(),
       createHtmlPlugin({
-        inject: { data: { APP_TITLE: env.VITE_APP_TITLE } }
+        inject: { data: { APP_TITLE: env.VITE_APP_TITLE } },
       }),
-      visualizer({ filename: './analyze/analyze.html', gzipSize: true })
-    ]
+      visualizer({ filename: './analyze/analyze.html', gzipSize: true }),
+    ],
   }
 })
